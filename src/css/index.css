@@ -3,12 +3,12 @@
   font-family: 'Share Tech Mono';
   font-style: normal;
   font-weight: 400;
-  src: url('../public/fonts/share-tech-mono-v15-latin-regular.eot'); /* IE9 Compat Modes */
-  src: url('../public/fonts/share-tech-mono-v15-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../public/fonts/share-tech-mono-v15-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
-       url('../public/fonts/share-tech-mono-v15-latin-regular.woff') format('woff'), /* Modern Browsers */
-       url('../public/fonts/share-tech-mono-v15-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('../public/fonts/share-tech-mono-v15-latin-regular.svg#ShareTechMono') format('svg'); /* Legacy iOS */
+  src: url('../../public/fonts/share-tech-mono-v15-latin-regular.eot'); /* IE9 Compat Modes */
+  src: url('../../public/fonts/share-tech-mono-v15-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../../public/fonts/share-tech-mono-v15-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../../public/fonts/share-tech-mono-v15-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../../public/fonts/share-tech-mono-v15-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../../public/fonts/share-tech-mono-v15-latin-regular.svg#ShareTechMono') format('svg'); /* Legacy iOS */
 }
 
 *,
