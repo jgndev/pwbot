@@ -25,14 +25,14 @@ yarn-debug.log*
 yarn-error.log*
 
 # terraform
-teffaform/aws/terraform.tfstate
+teffaform/aws/*.tfstate
 terraform/aws/*.tfstate.backup
-terraform/aws/*.teffaform.locak.hcl
+terraform/aws/*.hcl
 terraform/aws/.terraform
-terraform/azure/terraform.tfstate
+terraform/azure/*.tfstate
 terraform/azure/*.tfstate.backup
 terraform/azure/.terraform
-terraform/azure/*.teffaform.locak.hcl
+terraform/azure/*.hcl
 
 # env
 .env
