@@ -31,8 +31,8 @@ terraform/aws/*.hcl
 terraform/aws/.terraform
 terraform/azure/*.tfstate
 terraform/azure/*.tfstate.backup
-terraform/azure/.terraform
 terraform/azure/*.hcl
+terraform/azure/.terraform
 
 # env
 .env
