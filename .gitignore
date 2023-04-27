@@ -31,3 +31,7 @@ terraform/aws/.terraform
 terraform/azure/*.tfstate
 terraform/azure/*.tfstate.backup
 terraform/azure/.terraform
+
+# env
+.env
+.env.*
