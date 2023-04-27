@@ -116,7 +116,7 @@ const PasswordGenerator = () => {
             onChange={handleCheckboxChange}
           />
           <label className="uppercase" htmlFor="includeSpecialCharacters">
-            $pec!@l ch@r@cter$
+            $pe[!@l [h@r@[ter$
           </label>
         </div>
         <div className="number-input">

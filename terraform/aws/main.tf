@@ -29,8 +29,8 @@ EOF
 resource "aws_amplify_branch" "pwbot" {
   app_id      = aws_amplify_app.pwbot.id
   branch_name = "main"
+  enable_auto_build = true
 }
-
 
 output "amplify_app_url" {
   value = "https://${aws_amplify_app.pwbot.default_domain}"
