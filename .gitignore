@@ -25,7 +25,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # terraform
-terraaform/aws/*.tfstate
+terraform/aws/*.tfstate
 terraform/aws/*.tfstate.backup
 terraform/aws/*.hcl
 terraform/aws/.terraform
