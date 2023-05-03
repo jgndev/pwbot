@@ -51,7 +51,7 @@ body {
   place-content: center;
   place-items: center;
   height: 80vh;
-  margin: 0, 0, 5rem, 5rem;
+  margin: 0, 5rem, 0, 5rem;
 }
 
 .input-field {
@@ -62,9 +62,9 @@ body {
 
 input[type="checkbox"]::before {
   -ms-transform: scale(4);
-  -webkit-transform: scale(4);
-  -moz-transform: scale(4);
-  -o-transform: scale(4);
+  /*-webkit-transform: scale(4);*/
+  /*-moz-transform: scale(4);*/
+  /*-o-transform: scale(4);*/
   transform: scale(4);
   background-color: black;
   content: "";
@@ -73,7 +73,7 @@ input[type="checkbox"]::before {
   height: 12px;
   border: 1px solid white;
   margin-right: 5px;
-  box-shadow: 1.5px 2px 0 rgba(0, 0, 0, 1.0); 
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 1.0);
 }
 
 input[type="checkbox"]:checked::before {
