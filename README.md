@@ -1,46 +1,46 @@
-# Getting Started with Create React App
+![](images/logo.svg)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## POST a request, 🪄 get a password 🪄!
 
-## Available Scripts
+A REST API written in [Node.js](https://nodejs.org/en) wth [TypeScript](https://www.typescriptlang.org/) deployed to [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/)
+via [AWS CodePipeline](https://aws.amazon.com/codepipeline/).
 
-In the project directory, you can run:
 
-### `npm start`
+### 🌐 Health Check Endpoint
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**Request:**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Send a `GET` to the root endpoint `/`
 
-### `npm test`
+**Response:**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+If there are no problems with the server, it will simply respond with `OK` (HTTP 200)
+when sending a `GET` request to the root endpoint.
 
-### `npm run build`
+### 🌐 Password Generation Endpoint
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Request:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Send a `POST` request to the `/v1/passwords` endpoint with a JSON body with the following options.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+{
+    "length": 12,
+    "includeNumbers": "true",
+    "includeUppercase": "true",
+    "includeLowercase": "true",
+    "includeSpecialCharacters": "true",
+}
+```
 
-### `npm run eject`
+**length**: A number between 6 and 64. Password length will default to 12 if the length is outside this range.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**includeNumbers**: Include the numbers `0123456789` as possible characters in the password.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**includeUppercase**: Include uppercase letters of the [ASCII alphabet](https://en.wikipedia.org/wiki/ASCII).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**includeLowercase**: Include lowercase letters of the [ASCII alphabet](https://en.wikipedia.org/wiki/ASCII).
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**includeSpecialCharacters**: Include special characters `!@#$%^&*-_=+<>?;:[]{}(),./|` in the possible characters for the password.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+> If an options is omitted, PWB0T assumes you meant `true`, those characters will be included in the possible password.

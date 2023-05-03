@@ -24,16 +24,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# terraform
-terraform/aws/*.tfstate
-terraform/aws/*.tfstate.backup
-terraform/aws/*.hcl
-terraform/aws/.terraform
-terraform/azure/*.tfstate
-terraform/azure/*.tfstate.backup
-terraform/azure/*.hcl
-terraform/azure/.terraform
-
 # env
 .env
 .env.*
