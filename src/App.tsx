@@ -1,6 +1,6 @@
 import React from "react";
 import Header from './components/Header';
-import PasswordGenerator from "./components/Page";
+import PasswordGenerator from "./components/PasswordGenerator";
 
 const App = () => {
   return (
