@@ -4,10 +4,10 @@ import PasswordGenerator from "./components/PasswordGenerator";
 
 const App = () => {
   return (
-    <div className="main">
+    <main>
       <Header />
       <PasswordGenerator />
-    </div>
+    </main>
   );
 };
 
