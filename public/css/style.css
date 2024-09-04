@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply mx-auto my-auto font-mono grid text-zinc-300 bg-zinc-800;
+    }
+
+    main {
+       @apply mx-auto my-auto mt-[20vh] p-16 grid grid-cols-1 place-content-center border-2 border-zinc-700/30 rounded-md;
+    }
+
+    input[type="checkbox"] {
+        @apply h-5 w-5 cursor-pointer appearance-none rounded-md border transition-all before:absolute checked:border-indigo-500 checked:bg-indigo-500 checked:before:bg-indigo-500 hover:before:opacity-10;
+    }
+
+    input[type="number"] {
+        @apply p-2 m-2 w-[4rem] text-sm ring-1 ring-zinc-800 outline-0 focus:ring-indigo-500 focus:border-indigo-500 bg-zinc-900 rounded-md;
+    }
+
+    .generate {
+        @apply px-4 py-2 m-4 w-[12rem] text-zinc-50 bg-indigo-600 rounded-md;
+    }
+
+    .password {
+        @apply grid grid-cols-1 place-items-center space-y-2;
+    }
+
+    #copy-tooltip {
+        @apply py-1 px-2 my-2 text-white text-sm bg-indigo-600 text-center rounded-md;
+    }
+}
