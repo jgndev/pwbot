@@ -33,6 +33,9 @@ resource "aws_apprunner_service" "pwbot" {
     image_repository {
       image_configuration {
         port = "8080"
+        runtime_environment_variables = {
+          "LOG_LEVEL" = "DEBUG"
+        }
       }
       image_identifier      = "${aws_ecr_repository.app.repository_url}:latest"
       image_repository_type = "ECR"
@@ -44,6 +47,21 @@ resource "aws_apprunner_service" "pwbot" {
     cpu    = "1024"
     memory = "2048"
   }
+
+  health_check_configuration {
+    healthy_threshold   = 1
+    interval            = 5
+    path                = "/"
+    protocol            = "HTTP"
+    timeout             = 2
+    unhealthy_threshold = 5
+  }
+
+  tags = {
+    Name = "pwbot-service"
+  }
+
+  depends_on = [aws_iam_role_policy_attachment.apprunner_service_role_policy, aws_iam_role_policy_attachment.apprunner_service_role_cloudwatch_policy]
 }
 
 # IAM role for App Runner to access ECR
@@ -57,7 +75,7 @@ resource "aws_iam_role" "apprunner_service_role" {
         Action = "sts:AssumeRole"
         Effect = "Allow"
         Principal = {
-          Service = "build.apprunner.amazonaws.com"
+          Service = ["build.apprunner.amazonaws.com", "tasks.apprunner.amazonaws.com"]
         }
       }
     ]
@@ -66,6 +84,11 @@ resource "aws_iam_role" "apprunner_service_role" {
 
 resource "aws_iam_role_policy_attachment" "apprunner_service_role_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSAppRunnerServicePolicyForECRAccess"
+  role       = aws_iam_role.apprunner_service_role.name
+}
+
+resource "aws_iam_role_policy_attachment" "apprunner_service_role_cloudwatch_policy" {
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"
   role       = aws_iam_role.apprunner_service_role.name
 }
 

@@ -25,5 +25,5 @@ func main() {
 	e.POST("/password", application.NewPassword)
 
 	// start server
-	e.Logger.Fatal(e.Start(":8081"))
+	e.Logger.Fatal(e.Start(":8080"))
 }
