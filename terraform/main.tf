@@ -92,24 +92,9 @@ resource "aws_iam_role_policy_attachment" "apprunner_service_role_cloudwatch_pol
   role       = aws_iam_role.apprunner_service_role.name
 }
 
-# Custom domain configuration
-resource "aws_apprunner_custom_domain_association" "pwbot" {
-  domain_name = "pwbot.jgn.dev"
-  service_arn = aws_apprunner_service.pwbot.arn
-}
-
 # Get the hosted zone for jgn.dev
 data "aws_route53_zone" "jgn_dev" {
   name = "jgn.dev."
-}
-
-# Create CNAME record for custom domain
-resource "aws_route53_record" "pwbot" {
-  zone_id = data.aws_route53_zone.jgn_dev.zone_id
-  name    = "pwbot.jgn.dev"
-  type    = "CNAME"
-  ttl     = 300
-  records = [aws_apprunner_custom_domain_association.pwbot.dns_target]
 }
 
 # Create ACM Certificate for pwbot.jgn.dev
