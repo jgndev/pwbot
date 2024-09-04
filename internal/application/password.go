@@ -14,7 +14,7 @@ func NewPassword(c echo.Context) error {
 	}
 
 	// parse form values
-	uppercase := c.FormValue("uppercae") == "on"
+	uppercase := c.FormValue("uppercase") == "on"
 	lowercase := c.FormValue("lowercase") == "on"
 	numbers := c.FormValue("numbers") == "on"
 	special := c.FormValue("special") == "on"

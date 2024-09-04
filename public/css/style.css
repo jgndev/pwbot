@@ -27,6 +27,10 @@
         @apply grid grid-cols-1 place-items-center space-y-2;
     }
 
+    .icon {
+        @apply flex flex-col items-center justify-center;
+    }
+
     #copy-tooltip {
         @apply py-1 px-2 my-2 text-white text-sm bg-indigo-600 text-center rounded-md;
     }
