@@ -97,48 +97,21 @@ data "aws_route53_zone" "jgn_dev" {
   name = "jgn.dev."
 }
 
-# Create ACM Certificate for pwbot.jgn.dev
-resource "aws_acm_certificate" "pwbot" {
-  domain_name       = "pwbot.jgn.dev"
-  validation_method = "DNS"
-
-  tags = {
-    Name = "pwbot.jgn.dev-cert"
-  }
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
-# Create DNS record for ACM certificate validation
-resource "aws_route53_record" "cert_validation" {
-  for_each = {
-    for dvo in aws_acm_certificate.pwbot.domain_validation_options : dvo.domain_name => {
-      name   = dvo.resource_record_name
-      record = dvo.resource_record_value
-      type   = dvo.resource_record_type
-    }
-  }
-
-  allow_overwrite = true
-  name            = each.value.name
-  records         = [each.value.record]
-  ttl             = 60
-  type            = each.value.type
-  zone_id         = data.aws_route53_zone.jgn_dev.zone_id
-}
-
-# Certificate validation
-resource "aws_acm_certificate_validation" "pwbot" {
-  certificate_arn         = aws_acm_certificate.pwbot.arn
-  validation_record_fqdns = [for record in aws_route53_record.cert_validation : record.fqdn]
-}
-
 # App Runner custom domain association
 resource "aws_apprunner_custom_domain_association" "pwbot" {
   domain_name = "pwbot.jgn.dev"
   service_arn = aws_apprunner_service.pwbot.arn
+}
+
+# Create DNS records for custom domain validation
+resource "aws_route53_record" "validation" {
+  for_each = { for record in aws_apprunner_custom_domain_association.pwbot.certificate_validation_records : record.name => record }
+
+  zone_id = data.aws_route53_zone.jgn_dev.zone_id
+  name    = each.value.name
+  type    = each.value.type
+  records = [each.value.value]
+  ttl     = 300
 }
 
 # Create CNAME record for custom domain
@@ -166,19 +139,9 @@ output "custom_domain" {
   description = "The custom domain associated with the App Runner service"
 }
 
-output "cname_record" {
-  value       = aws_route53_record.pwbot.name
-  description = "The CNAME record created in Route 53"
-}
-
-output "certificate_arn" {
-  value       = aws_acm_certificate.pwbot.arn
-  description = "The ARN of the ACM certificate for pwbot.jgn.dev"
-}
-
-output "certificate_status" {
-  value       = aws_acm_certificate.pwbot.status
-  description = "The status of the ACM certificate for pwbot.jgn.dev"
+output "apprunner_custom_domain_status" {
+  value       = aws_apprunner_custom_domain_association.pwbot.status
+  description = "The status of the custom domain association"
 }
 
 output "apprunner_custom_domain_validation_records" {
