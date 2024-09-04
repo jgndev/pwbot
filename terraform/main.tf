@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 3.0" # Use the latest 3.x version
+      version = "~> 3.0"
     }
   }
 }
@@ -34,7 +34,7 @@ resource "aws_apprunner_service" "pwbot" {
       image_configuration {
         port = "8080"
       }
-      image_identifier      = "${data.aws_ecr_repository.app_repo.repository_url}:latest"
+      image_identifier      = "${aws_ecr_repository.app.repository_url}:latest"
       image_repository_type = "ECR"
     }
     auto_deployments_enabled = true
@@ -89,22 +89,23 @@ resource "aws_route53_record" "pwbot" {
   records = [aws_apprunner_custom_domain_association.pwbot.dns_target]
 }
 
-# output ecr repository
-output "aws_ecr_repository" {
-  value = aws_ecr_repository.app.repository_url
+# Outputs
+output "ecr_repository_url" {
+  value       = aws_ecr_repository.app.repository_url
+  description = "The URL of the ECR repository"
 }
 
-# output apprunner_service_url
 output "apprunner_service_url" {
-  value = aws_apprunner_service.pwbot.service_url
+  value       = aws_apprunner_service.pwbot.service_url
+  description = "The URL of the App Runner service"
 }
 
-# output cname record
-output "aws_route53_record" {
-  value = aws_route53_record.pwbot.name
-}
-
-# output custom_domain
 output "custom_domain" {
-  value = aws_apprunner_custom_domain_association.pwbot.domain_name
+  value       = aws_apprunner_custom_domain_association.pwbot.domain_name
+  description = "The custom domain associated with the App Runner service"
+}
+
+output "cname_record" {
+  value       = aws_route53_record.pwbot.name
+  description = "The CNAME record created in Route 53"
 }
