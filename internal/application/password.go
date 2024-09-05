@@ -20,13 +20,7 @@ func NewPassword(c echo.Context) error {
 	special := c.FormValue("special") == "on"
 	length, _ := strconv.Atoi(c.FormValue("length"))
 
-	pwo := models.Password{
-		Uppercase: uppercase,
-		Lowercase: lowercase,
-		Numbers:   numbers,
-		Special:   special,
-		Length:    length,
-	}
+	pwo := models.NewPassword(uppercase, lowercase, numbers, special, length)
 
 	pw, err := pwo.GeneratePassword()
 	if err != nil {
